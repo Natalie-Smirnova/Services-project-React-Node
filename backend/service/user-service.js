@@ -1,4 +1,4 @@
-const UserModel = require("../data/user");
+const UserModel = require("../data/user-model");
 
 exports.createUser = async (user) => {
   return await UserModel.create(user);
