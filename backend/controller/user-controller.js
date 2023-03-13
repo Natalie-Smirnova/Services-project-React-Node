@@ -20,7 +20,8 @@ exports.getUserById = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   try {
-    const user = await userService.updateUser(req.params.id, req.body);
+    await userService.updateUser(req.params.id, req.body);
+    const user = await userService.getUserById(req.params.id);
     res.json({ data: user, status: "success" });
   } catch (err) {
     res.status(500).json({ error: err.message });
