@@ -5,8 +5,8 @@ export default function Layout(props: { children: any }) {
         <div>
             <Head>
                 <title>Services Project</title>
-                <link rel="icon" href="#"/>
-                <meta name="keywords" content="services, business"/>
+                <link rel="icon" href="#" />
+                <meta name="keywords" content="services, business" />
             </Head>
             <main>{props.children}</main>
         </div>
