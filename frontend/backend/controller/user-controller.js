@@ -1,6 +1,15 @@
-const userService = require("../service/user-service");
+import userService from "../service/user-service";
 
-exports.createUser = async (req, res) => {
+const getUsers = async (req, res) => {
+  try {
+    const users = await userService.getUsers();
+    res.json({ data: users, status: "success" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+const createUser = async (req, res) => {
   try {
     const user = await userService.createUser(req.body);
     res.json({ data: user, status: "success" });
@@ -9,26 +18,26 @@ exports.createUser = async (req, res) => {
   }
 };
 
-exports.getUserById = async (req, res) => {
+const getUserById = async (req, res, id) => {
   try {
-    const user = await userService.getUserById(req.params.id);
+    const user = await userService.getUserById(req.query.userId);
     res.json({ data: user, status: "success" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-exports.updateUser = async (req, res) => {
+const updateUser = async (req, res) => {
   try {
     await userService.updateUser(req.params.id, req.body);
-    const user = await userService.getUserById(req.params.id);
+    const user = await userService.getUserById(req.query.userId);
     res.json({ data: user, status: "success" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-exports.deleteUser = async (req, res) => {
+const deleteUser = async (req, res) => {
   try {
     await userService.deleteUser(req.params.id);
     res.json({status: "success" });
@@ -36,3 +45,5 @@ exports.deleteUser = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+export default {getUsers, createUser, getUserById, updateUser, deleteUser};
