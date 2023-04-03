@@ -29,7 +29,7 @@ const getUserById = async (req, res, id) => {
 
 const updateUser = async (req, res) => {
   try {
-    await userService.updateUser(req.params.id, req.body);
+    await userService.updateUser(req.query.userId, req.body);
     const user = await userService.getUserById(req.query.userId);
     res.json({ data: user, status: "success" });
   } catch (err) {
@@ -39,7 +39,7 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
-    await userService.deleteUser(req.params.id);
+    await userService.deleteUser(req.query.userId);
     res.json({status: "success" });
   } catch (err) {
     res.status(500).json({ error: err.message });
